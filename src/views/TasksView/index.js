@@ -12,6 +12,31 @@ class TasksView extends Component {
     tasksCreatedbyMe: []
   }
 
+  refresh() {
+
+    this.setState({
+      imBusy: true
+    })
+
+    Promise.all([
+      getTasksAssignedTo('Bartek'),
+      getTasksCreatedBy('bartek0402@gmail.com')
+    ]).then((data) => {
+
+      const [tasksCreatedbyMe, tasksAssignedToMe] = data
+
+      console.log('tasks data', tasksCreatedbyMe, tasksAssignedToMe)
+
+      this.setState({
+        tasksAssignedToMe,
+        tasksCreatedbyMe,
+        imBusy: false
+      })
+
+    })
+
+  }
+
   componentDidMount() {
 
     Promise.all([
@@ -35,7 +60,7 @@ class TasksView extends Component {
 
   render() {
 
-    if(this.state.imBusy){
+    if (this.state.imBusy) {
       return (
         <h2>Hold on there tiger, I'm busy now...</h2>
       )
@@ -43,8 +68,16 @@ class TasksView extends Component {
     return (
       <div>
         <h2>Tasks View</h2>
-        
-        <TasksAssingedToMe {...this.state.tasksAssignedToMe}/>
+        <button
+          className="btn btn-block btn-warning"
+          onClick={() => {
+            this.refresh()
+          }}>
+          Refresh
+        </button>
+        <TasksAssingedToMe {...this.state.tasksAssignedToMe}
+          refresh={() => this.refresh()}
+        />
 
       </div>
     )

@@ -73,3 +73,106 @@ export const deleteTask = (id) => {
     .then(fetchLogger)
 
 }
+
+// --- Change description of a single task ---
+export const changeDescriptionOfTask = task_id => {
+  const description = prompt('Enter new description')
+
+  const url = `${TASKS_RESOURCE_PATH}/${task_id}/change-description`
+
+  const task = {
+    description: description
+  }
+  const fetchConfig = {
+    method: "PATCH",
+    body: JSON.stringify(task),
+    headers: {
+      "Content-type": "application/json"
+    }
+  }
+
+  if (description) {
+    return fetch(url, fetchConfig)
+      .then(fetchLogger)
+  } else {
+    return Promise.resolve('')
+  }
+}
+
+// --- Assign task to a specific user ---
+export const changeAsssigneeOfTask = task_id => {
+  const assignee = prompt('Who would you like to assign this task')
+
+  const url = `${TASKS_RESOURCE_PATH}/${task_id}/assign-to/${assignee}`
+
+  const task = {
+    assignee: assignee
+  }
+  const fetchConfig = {
+    method: "PATCH",
+    body: JSON.stringify(task),
+    headers: {
+      "Content-type": "application/json"
+    }
+  }
+
+  if (assignee) {
+    return fetch(url, fetchConfig)
+      .then(fetchLogger)
+  } else {
+    return Promise.resolve('')
+  }
+}
+
+// --- Change status of a specific task ---
+export const changeStatusOfTask = task_id => {
+  const status = prompt('Set new status')
+
+  const url = `${TASKS_RESOURCE_PATH}/${task_id}/change-status`
+
+  const task = {
+    status: status
+  }
+  const fetchConfig = {
+    method: "PATCH",
+    body: JSON.stringify(task),
+    headers: {
+      "Content-type": "application/json"
+    }
+  }
+
+  if (status) {
+    return fetch(url, fetchConfig)
+      .then(fetchLogger)
+  } else {
+    return Promise.resolve('')
+  }
+}
+
+// --- Assign task to a specific user ---
+export const logOursToTask = task_id => {
+  const logger = prompt('Who is logging in')
+
+  const hours = prompt('How many hours would you like to login')
+
+  const url = `${TASKS_RESOURCE_PATH}/${task_id}/log-hours`
+
+  const task = {
+    logger: logger,
+    hours: hours
+  }
+  const fetchConfig = {
+    method: "PATCH",
+    body: JSON.stringify(task),
+    headers: {
+      "Content-type": "application/json"
+    }
+  }
+
+  if (logger && hours > 0) {
+    return fetch(url, fetchConfig)
+      .then(fetchLogger)
+  } else {
+    return Promise.resolve('')
+  }
+}

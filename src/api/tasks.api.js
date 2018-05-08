@@ -31,7 +31,7 @@ export const addTaskToUser = (creator, title) => {
 
 // --- Getting all tasks created by a specific user ---
 export const getTasksCreatedBy = (creator) => {
-  const url = `${TASKS_RESOURCE_PATH}/${creator}`
+  const url = `${TASKS_RESOURCE_PATH}/search/creator/${creator}`
 
   return fetch(url)
     .then(fetchLogger)
@@ -40,7 +40,7 @@ export const getTasksCreatedBy = (creator) => {
 
 // --- Getting all tasks created by a specific user ---
 export const getTasksAssignedTo = (assignee) => {
-  const url = `${TASKS_RESOURCE_PATH}/${assignee}`
+  const url = `${TASKS_RESOURCE_PATH}/search/assignee/${assignee}`
 
   return fetch(url)
     .then(fetchLogger)

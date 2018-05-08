@@ -4,13 +4,13 @@ import React, { Component } from 'react'
 import TasksView from './views/TasksView'
 
 import './App.css'
-import { getAllUsers } from './api/users.api'
-import { getAllTasks } from './api/tasks.api'
+// import { getAllUsers } from './api/users.api'
+// import { getAllTasks } from './api/tasks.api'
 
 class App extends Component {
   componentDidMount() {
-    getAllUsers()
-    getAllTasks()
+    // getAllUsers()
+    // getAllTasks()
   }
 
   render() {
